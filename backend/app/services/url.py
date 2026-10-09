@@ -10,6 +10,7 @@ from app.schemas.url import URLCreate , URLResponse
 
 def create_short_url(db:session , url_data:URLCreate)-> URL:
     original_url = str(url_data.original_url)
+    name = str(url_data.name)
 
     while True:
         short_code = "".join(
@@ -24,7 +25,8 @@ def create_short_url(db:session , url_data:URLCreate)-> URL:
 
     new_url = URL(
         original_url=original_url,
-        short_code=short_code
+        short_code=short_code,
+        name=name
     )
 
     db.add(new_url)
@@ -61,4 +63,15 @@ def get_url_analytics(db:session,short_code:str)->URL:
 def get_all_urls(db:session)->URL:
     urls = db.query(URL).all()
     return urls
+
+def delete_url(db:session,url_id)->str:
+    url = db.query(URL).filter(URL.id == int(url_id)).first()
+
+    if not url:
+        raise HTTPException(status_code=404,detail="Url doesnt exists")
+
+    db.delete(url)
+    db.commit()
+
+    return "Url deleted successfully !!"
 

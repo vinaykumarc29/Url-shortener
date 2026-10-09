@@ -13,9 +13,14 @@ class URL(Base):
         primary_key=True,
     )
 
+    name:Mapped[str] = mapped_column(
+        String(2048),
+        nullable=False
+    )
+
     original_url:Mapped[str] =mapped_column(
         String(2048),
-        nullable=False,
+        nullable=False
     )
 
     short_code:Mapped[str] = mapped_column(
