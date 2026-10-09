@@ -1,4 +1,4 @@
-from fastapi import APIRouter , Depends ,status
+from fastapi import APIRouter , Depends ,status ,Query
 from sqlalchemy.orm import session
 
 from app.database.connection import getdb
@@ -13,8 +13,8 @@ def create_url(url_data:URLCreate , db:session=Depends(getdb)):
     return create_short_url(db,url_data)
 
 @router.get("/" , status_code=status.HTTP_200_OK)
-def show_all_urls(db:session=Depends(getdb)):
-    return get_all_urls(db)
+def show_all_urls(search:str | None=Query(default=None ,max_lenth=200) ,db:session=Depends(getdb)):
+    return get_all_urls(db,search)
 
 @router.get("/{short_code}", status_code=status.HTTP_200_OK)
 def redirect(short_code:str,db:session=Depends(getdb)):

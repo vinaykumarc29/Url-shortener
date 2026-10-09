@@ -2,6 +2,7 @@ import secrets
 import string
 
 from sqlalchemy.orm import session
+from sqlalchemy import or_
 from fastapi import HTTPException
 
 from app.models.url import URL
@@ -60,9 +61,23 @@ def get_url_analytics(db:session,short_code:str)->URL:
 
     return url
 
-def get_all_urls(db:session)->URL:
-    urls = db.query(URL).all()
-    return urls
+def get_all_urls(db:session , search:str )->URL:
+    query = db.query(URL)
+        
+    if search and search.strip():
+        term = f"%{search.strip()}%"
+        
+        query = query.filter(
+            or_(
+                URL.name.ilike(term),
+                URL.short_code.ilike(term)
+            )
+        )
+        
+        return query.order_by(URL.id.desc()).all()
+    
+    return query.all()
+    
 
 def delete_url(db:session,url_id)->str:
     url = db.query(URL).filter(URL.id == int(url_id)).first()
