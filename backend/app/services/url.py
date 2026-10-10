@@ -70,14 +70,12 @@ def get_all_urls(db:Session , search:str )->URL:
     return query.order_by(URL.id.desc()).all()
     
 
-def delete_url(db:Session,url_id)->str:
-    url = db.query(URL).filter(URL.id == int(url_id)).first()
+def delete_url(db: Session, url_id: int) -> None:
+    url = db.query(URL).filter(URL.id == url_id).first()
 
     if not url:
-        raise HTTPException(status_code=404,detail="Url doesnt exists")
+        raise HTTPException(status_code=404, detail="Url doesn't exist")
 
     db.delete(url)
     db.commit()
-
-    return "Url deleted successfully !!"
 

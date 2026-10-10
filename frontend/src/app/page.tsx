@@ -30,9 +30,9 @@ export default function Home() {
           <ThemeToggle />
         </header>
 
-        <section className="w-full">
+        <section className="w-full space-y-6">
           <UrlForm />
-          <UrlTable/>
+          <UrlTable />
         </section>
       </div>
     </main>
