@@ -1,107 +1,147 @@
-URL Shortener
+# URL Shortener
 
-A full-stack URL Shortener application that converts long URLs into shorter, shareable links. The project uses a Next.js frontend, a FastAPI backend, and PostgreSQL for persistent data storage.
+A full-stack URL Shortener application that converts long URLs into shorter, shareable links. The project uses a **Next.js** frontend, a **FastAPI** backend, and **PostgreSQL** for persistent data storage.
 
-Live Demo: https://url-shortener-frontend-596g.onrender.com
+**Live Demo:** [https://url-shortener-frontend-596g.onrender.com](https://url-shortener-frontend-596g.onrender.com)
 
-Tech Stack
+---
 
-Frontend
+## Tech Stack
 
-- Next.js — React framework for building the user interface.
+### Frontend
 
-Backend
+- **Next.js** — React framework for building the user interface.
 
-- Python — Backend programming language
+### Backend
 
-- FastAPI — REST API development and request handling.
+- **Python** — Backend programming language.
+- **FastAPI** — REST API development and request handling.
 
-Database & Deployment
+### Database
 
-- PostgreSQL — Persistent storage for URL records.
+- **PostgreSQL** — Persistent storage for URL records.
+- **Neon** — Managed PostgreSQL database.
 
-- Neon — Managed PostgreSQL database.
+---
 
-Features
+## Features
 
 - Convert long URLs into short, shareable links.
 - Redirect users from short links to their original URLs.
 - Store URL records in PostgreSQL.
-- shows the no of clicks for each url
+- Track the number of clicks for each URL.
 
-Getting Started
+---
 
-Prerequisites
+## API Endpoints
+
+| Method | Endpoint | Description |
+| ------ | -------- | ----------- |
+| GET | `/` | Check whether the API is running. |
+| GET | `/health` | Check the health status of the backend. |
+| POST | `/api/urls/` | Create a short URL. |
+| GET | `/api/urls/` | Retrieve URLs, with optional search support. |
+| DELETE | `/api/urls/{url_id}` | Delete a URL by its ID. |
+| GET | `/{short_code}` | Redirect to the original URL. |
+| GET | `/docs` | Interactive Swagger API documentation. |
+
+---
+
+## Getting Started
+
+### Prerequisites
 
 Install the following before running the project:
 
-- Python 3.10 or a compatible version
+- Python 3.10 or later
 - Node.js and npm
 - PostgreSQL database or a Neon PostgreSQL connection
 
-1. Clone the repository
+### 1. Clone the Repository
 
+```bash
 git clone https://github.com/vinaykumarc29/Url-shortener.git
 cd Url-shortener
+```
 
-2. Set up the backend
+### 2. Set Up the Backend
 
 Navigate to the backend directory:
 
+```bash
 cd backend
+```
 
 Create and activate a virtual environment.
 
-Windows:
+**Windows:**
 
+```bash
 python -m venv venv
 venv\Scripts\activate
+```
 
-Linux/macOS:
+**Linux/macOS:**
 
+```bash
 python3 -m venv venv
 source venv/bin/activate
+```
 
-Install the Python dependencies:
+Install the dependencies:
 
+```bash
 pip install -r requirements.txt
+```
 
-3. Configure environment variables
+### 3. Configure Environment Variables
 
-Create a ".env" file in the backend directory and configure the required variables.
+Create a `.env` file inside the `backend` directory:
 
+```env
 DATABASE_URL=your_postgresql_connection_string
 FRONTEND_URL=http://localhost:3000
+```
 
-Replace the example values with your actual database connection string and frontend origin. Keep credentials private and never commit your ".env" file.
+Replace the database URL with your actual PostgreSQL connection string. Keep your credentials private and never commit your `.env` file.
 
-4. Start the backend
+### 4. Run the Backend
 
-From the "backend" directory, run:
+From the `backend` directory, run:
 
+```bash
 uvicorn app.main:app --reload
+```
 
-The backend should now be available at:
+The backend will be available at:
 
-- API: "http://localhost:8000"
-- Interactive API documentation: "http://localhost:8000/docs"
-- Health check: "http://localhost:8000/health"
+- **API:** http://localhost:8000
+- **API Documentation:** http://localhost:8000/docs
+- **Health Check:** http://localhost:8000/health
 
-5. Set up the frontend
+### 5. Set Up the Frontend
 
 Open a second terminal at the project root:
 
+```bash
 cd frontend
 npm install
+```
 
-Create a ".env" file in the frontend directory:
+Create a `.env` file inside the `frontend` directory:
 
+```env
 NEXT_PUBLIC_API_URL=http://localhost:8000
+```
 
-Start the development server:
+Start the frontend development server:
 
+```bash
 npm run dev
+```
 
-Open "http://localhost:3000" in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Author : VinaykumarC
+---
+
+## Author : **VinaykumarC**
