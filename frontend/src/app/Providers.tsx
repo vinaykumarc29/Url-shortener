@@ -7,7 +7,7 @@ interface ProvidersProps {
   children: React.ReactNode;
 }
 
-export const providers = ({ children }: ProvidersProps) => {
+export const Providers = ({ children }: ProvidersProps) => {
   const [queryClient] = useState(() => new QueryClient());
 
   return (

@@ -1,7 +1,7 @@
 import secrets
 import string
 
-from sqlalchemy.orm import session
+from sqlalchemy.orm import Session
 from sqlalchemy import or_
 from fastapi import HTTPException
 
@@ -9,7 +9,7 @@ from app.models.url import URL
 from app.schemas.url import URLCreate , URLResponse
 
 
-def create_short_url(db:session , url_data:URLCreate)-> URL:
+def create_short_url(db:Session , url_data:URLCreate)-> URL:
     original_url = str(url_data.original_url)
     name = str(url_data.name)
 
@@ -36,8 +36,8 @@ def create_short_url(db:session , url_data:URLCreate)-> URL:
 
     return new_url
 
-def redirect_to_original_url(db:session,short_code:str)->str:
-    url = db.query(URL).filter(URL.short_code == short_code).first()
+def redirect_to_original_url(db:Session,short_code:str)->str:
+    url = db.query(URL).filter(URL.short_code == str(short_code)).first()
 
     if not url:
         raise HTTPException(
@@ -52,7 +52,7 @@ def redirect_to_original_url(db:session,short_code:str)->str:
 
     return original_url
 
-def get_all_urls(db:session , search:str )->URL:
+def get_all_urls(db:Session , search:str )->URL:
     query = db.query(URL)
         
     if search and search.strip():
@@ -67,10 +67,10 @@ def get_all_urls(db:session , search:str )->URL:
         
         return query.order_by(URL.id.desc()).all()
     
-    return query.all()
+    return query.order_by(URL.id.desc()).all()
     
 
-def delete_url(db:session,url_id)->str:
+def delete_url(db:Session,url_id)->str:
     url = db.query(URL).filter(URL.id == int(url_id)).first()
 
     if not url:

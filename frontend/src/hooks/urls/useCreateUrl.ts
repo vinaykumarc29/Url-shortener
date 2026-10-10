@@ -1,9 +1,9 @@
 import { useMutation , useQueryClient } from "@tanstack/react-query";
 import { create_url } from "@/lib/api/url";
-import { UrlPayload } from "@/types/url";
 
 
-export const useCreateUrl = (payload:UrlPayload)=>{
+
+export const useCreateUrl = ()=>{
     const queryClient = useQueryClient()
 
     return useMutation({
