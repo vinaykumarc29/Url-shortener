@@ -52,15 +52,6 @@ def redirect_to_original_url(db:session,short_code:str)->str:
 
     return original_url
 
-
-def get_url_analytics(db:session,short_code:str)->URL:
-    url = db.query(URL).filter(URL.short_code == short_code).first()
-
-    if not url:
-        raise HTTPException(status_code=404,detail="Invalid Short_code")
-
-    return url
-
 def get_all_urls(db:session , search:str )->URL:
     query = db.query(URL)
         
