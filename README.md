@@ -2,7 +2,7 @@
 
 A full-stack URL Shortener application that converts long URLs into shorter, shareable links. The project uses a **Next.js** frontend, a **FastAPI** backend, and **PostgreSQL** for persistent data storage.
 
-**Live Demo:** [https://url-shortener-frontend-596g.onrender.com](https://url-shortener-frontend-596g.onrender.com)
+**Live Demo:** [https://url-shortener.vinaykumarc.dev](https://url-shortener.vinaykumarc.dev)
 
 ---
 
